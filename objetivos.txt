@@ -1,0 +1,8 @@
+Objetivos:
+	1 - Se mueve pixel a pixel , ocupa 2x2 y los mapas estan formados por celdas de 1x1. En la primera parte tenemos que ser capaces de mapear toda la casa basicamente, 
+	empezamos por un seguimiento de paredes para despues enocntrar el interior.
+
+	2- Moverse en linea recta, de alguna menera hay que hacer planificacion de trayectorias
+
+	3- El usuario particiapa, pone waypoints y como haria para que el usuario la dibuje y despues que el robot la siga basicamente.
+	
