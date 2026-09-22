@@ -71,17 +71,20 @@ class vacuum():
             return
         # front
         dd = self.screen['window']['density']
-        t1 = self.vacuum_img['bbox'].copy()
-        t1.x = (self.position[0] - VACUUM_SIZE//2) * dd
-        t1.y = (self.position[1] - VACUUM_SIZE//2) * dd
+        base = self.vacuum_img['bbox'].copy()
+        base.x = (self.position[0] - VACUUM_SIZE//2) * dd
+        base.y = (self.position[1] - VACUUM_SIZE//2) * dd
+        
+        #Front
+        t1 = base.copy()
         t1.x += (self.velocity[0] * dd)
         t1.y += (self.velocity[1] * dd)
         # left
-        t0 = t1.copy()
+        t0 = base.copy()
         t0.x += (self.velocity[1] * dd)
         t0.y -= (self.velocity[0] * dd)
         # right
-        t2 = t1.copy()
+        t2 = base.copy()
         t2.x -= (self.velocity[1] * dd)
         t2.y += (self.velocity[0] * dd)
         self.sensor['proximity'] = {'left':False, 'front':False, 'right':False}
