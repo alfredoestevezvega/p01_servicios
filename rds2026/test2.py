@@ -23,6 +23,7 @@ while simulation.is_running:
     # update world
     # press Q to quit, SPACE to stop/run and D to show/hide tiles
     #
+    print()
     simulation.update()
 
 # end

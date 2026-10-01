@@ -3,15 +3,16 @@
 
 import rds2026simulation, rds2026environment, rds2026machines
 from random import randint
+from Comportamientos import FollowWall
 
 COOULDOWN_FRAMES = 1
 
 # init system
-robot = rds2026machines.vacuum_zero(position = (21, 21), orientation = 0)
+robot = rds2026machines.vacuum_zero(position = (3, 3), orientation = 0)
 simulation = rds2026simulation.simulation(
     size = (700, 700),
-    fps = 16,
-    environment = rds2026environment.floorplan("cfg_0.py"),
+    fps = 32,
+    environment = rds2026environment.floorplan("cfg_3.py"),
     machine = robot)
 
 simulation.start()
@@ -44,7 +45,12 @@ def rotate(alpha):
     cd = COOULDOWN_FRAMES
     robot.start()
 # Main loop
-while simulation.is_running:
+
+comp = FollowWall(robot)
+action = "move"
+alpha = 0
+#while simulation.is_running:
+for i in range(300): 
     ## Machine State ##
     # FOLLOW_WALL_RIGHT -> advance and turn if object infront
     # SEARCH_WALL -> advance until there is a wall infront
@@ -52,34 +58,22 @@ while simulation.is_running:
 
     # Update the world
     simulation.update()
-
     # No hacemos nada si se ha aplicado un CD
     if cd > 0:
-        cd =-1
+        cd -=1
 
         continue
+    action, alpha = comp.get_action_()
 
-    if front_s() and right_s() and left_s():
-        rotate(180)
+    if action == "rotate":
+        rotate(alpha)
 
-    # Search
-    elif state == SEARCH_WALL:
-        if front_s():
-            rotate(90)
-            state = FOLLOW_WALL_RIGHT
-        else:
-            if not robot.is_running:
-                robot.start()
-
-    # Follow
-    elif state == FOLLOW_WALL_RIGHT:
-        if front_s():
-            rotate(90)
-        elif not right_s():
-            rotate(-90)
-        else:
-            if not robot.is_running:
-                robot.start()
+    elif action == "move":
+        if not robot.is_running:
+            robot.start()   
+    elif action == "stop":
+        break
+print(comp.imprimir_celdas())
 # end
 simulation.stop()
 
