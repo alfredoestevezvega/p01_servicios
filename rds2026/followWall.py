@@ -12,7 +12,7 @@ robot = rds2026machines.vacuum_zero(position = (9, 9), orientation = 0)
 simulation = rds2026simulation.simulation(
     size = (700, 700),
     fps = 200,
-    environment = rds2026environment.floorplan("cfg_0.py"),
+    environment = rds2026environment.floorplan("cfg_2.py"),
     machine = robot)
 
 simulation.start()
