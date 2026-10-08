@@ -30,7 +30,7 @@ simulation = rds2026simulation.simulation(
     size=(700, 700),
     fps=200,
     environment=rds2026environment.floorplan(
-        "cfg_0.py"
+        "cfg_1.py"
     ),
     machine=robot
 )
@@ -68,7 +68,7 @@ def rotate(alpha):
 # IMPORTANTE:
 # tiene que utilizar las mismas coordenadas que mapa.json
 
-OBJETIVO = (15, 12)
+OBJETIVO = (14, 14)
 
 
 # ================================================================
